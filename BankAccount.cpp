@@ -112,6 +112,17 @@ void *InternetAccess(void *){
 	return NULL;
 }
 //**************************************************************//
+void *IncomingWirelessTransfer(void*){
+	if (accountStatus != true){
+		cout << "Money Transfer failed, account closed" << endl;
+	}
+	else{
+		int incomingAmount = rand() % (500000 - 20000 + 1) + 20000;
+		availableBalance = availableBalance + incomingAmount;
+	}
+	pthread_exit(NULL);
+}
+//**************************************************************//
 int main(){
 
 	// pthread_t bankThreads[2];
@@ -121,11 +132,13 @@ int main(){
 	// }
 	pthread_t thread1;
 	pthread_t thread2;
+	pthread_t thread3;
 
-	pthread_create(&thread1,NULL,MobileAccess,NULL);
-	pthread_join(thread1,NULL);
-	pthread_create(&thread2,NULL,InternetAccess,NULL);
+	pthread_create(&thread1,NULL,IncomingWirelessTransfer,NULL);
+	pthread_create(&thread2,NULL,MobileAccess,NULL);
 	pthread_join(thread2,NULL);
+	pthread_create(&thread3,NULL,InternetAccess,NULL);
+	pthread_join(thread3,NULL);
 
 	return 0;
 }
