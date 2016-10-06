@@ -5,15 +5,9 @@
 
 using namespace std;
 
-// int accountNumber; //identifier of the account
-// int availableBalance; //amount of money in Ksh in bank
-// bool accountStatus; //1 will represent open and 0 closed
-
-
-int accountNumber = 111222333;
-int availableBalance = 500000;
-bool accountStatus = true;
-
+int accountNumber = 111222333;//identifier of the account
+int availableBalance = 500000;//amount of money in Ksh in bank
+bool accountStatus = true;//true will represent open and false, closed
 
 
 //**************************************************************//
