@@ -123,10 +123,10 @@ void *IncomingWirelessTransfer(void*){
 		pthread_mutex_lock(&balanceMutex);
 		cout << endl << "Available balance variable locked due to incoming wire transfer" << endl;
 		int incomingAmount = rand() % (500000 - 20000 + 1) + 20000;
-		cout << "..." << endl;
-		cout << "Transfer completed, variable unlocked. You may proceed" << endl << endl;
-		pthread_mutex_unlock(&balanceMutex);
+		cout << "..." << endl;		
 		availableBalance = availableBalance + incomingAmount;
+		cout << "Transfer completed, variable unlocked. New Balance: " << availableBalance << endl << endl;
+		pthread_mutex_unlock(&balanceMutex);
 	}
 	pthread_exit(NULL);
 }
@@ -141,6 +141,6 @@ int main(){
 	pthread_join(thread2,NULL);
 	pthread_create(&thread3,NULL,InternetAccess,NULL);
 	pthread_join(thread3,NULL);
-	
+
 	return 0;
 }
