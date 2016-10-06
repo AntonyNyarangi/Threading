@@ -5,6 +5,9 @@
 
 using namespace std;
 
+pthread_mutex_t balanceMutex;
+
+
 int accountNumber = 111222333;//identifier of the account
 int availableBalance = 500000;//amount of money in Ksh in bank
 bool accountStatus = true;//true will represent open and false, closed
@@ -117,28 +120,27 @@ void *IncomingWirelessTransfer(void*){
 		cout << "Money Transfer failed, account closed" << endl;
 	}
 	else{
+		pthread_mutex_lock(&balanceMutex);
+		cout << endl << "Available balance variable locked due to incoming wire transfer" << endl;
 		int incomingAmount = rand() % (500000 - 20000 + 1) + 20000;
+		cout << "..." << endl;
+		cout << "Transfer completed, variable unlocked. You may proceed" << endl << endl;
+		pthread_mutex_unlock(&balanceMutex);
 		availableBalance = availableBalance + incomingAmount;
 	}
 	pthread_exit(NULL);
 }
 //**************************************************************//
-int main(){
-
-	// pthread_t bankThreads[2];
-	// int i;
-	// for(i = 1; i = 2; i++){
-	// 	cout << "Creating thread, "<< i
-	// }
+int main(){	
 	pthread_t thread1;
 	pthread_t thread2;
 	pthread_t thread3;
-
-	pthread_create(&thread1,NULL,IncomingWirelessTransfer,NULL);
+	
 	pthread_create(&thread2,NULL,MobileAccess,NULL);
+	pthread_create(&thread1,NULL,IncomingWirelessTransfer,NULL);
 	pthread_join(thread2,NULL);
 	pthread_create(&thread3,NULL,InternetAccess,NULL);
 	pthread_join(thread3,NULL);
-
+	
 	return 0;
 }
