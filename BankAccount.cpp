@@ -139,6 +139,7 @@ void *IncomingWirelessTransfer(void*){
 		int incomingAmount = rand() % (500000 - 20000 + 1) + 20000;
 		cout << "..." << endl;		
 		availableBalance = availableBalance + incomingAmount;
+		cout << endl << "The transfer amount is: "<< incomingAmount << endl;
 		cout << "Transfer completed, variable unlocked. New Balance: " << availableBalance << endl << endl;
 		pthread_mutex_unlock(&balanceMutex);
 	}
