@@ -8,7 +8,7 @@ Bank Account
 Names & RegNo 
 -------------
 Antony Momanyi Nyarangi (P15/33522/2015)
-Adah Meda Odhiambo (P15/33828/2015)
+
 
 Date:Oct 6 2016*/
 
